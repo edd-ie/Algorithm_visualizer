@@ -1,0 +1,117 @@
+{
+	"backtraceGraph" : 
+	{
+		"commands" : 
+		[
+			"install",
+			"include"
+		],
+		"files" : 
+		[
+			"Library/raylib/cmake/InstallConfigurations.cmake",
+			"Library/raylib/src/CMakeLists.txt"
+		],
+		"nodes" : 
+		[
+			{
+				"file" : 1
+			},
+			{
+				"command" : 1,
+				"file" : 1,
+				"line" : 110,
+				"parent" : 0
+			},
+			{
+				"file" : 0,
+				"parent" : 1
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 1,
+				"parent" : 2
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 22,
+				"parent" : 2
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 23,
+				"parent" : 2
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 24,
+				"parent" : 2
+			}
+		]
+	},
+	"installers" : 
+	[
+		{
+			"backtrace" : 3,
+			"component" : "Unspecified",
+			"destination" : "lib",
+			"paths" : 
+			[
+				"Library/raylib/raylib/libraylib.a"
+			],
+			"targetId" : "raylib::@e4417b479c0da1180ab5",
+			"targetIndex" : 2,
+			"type" : "target"
+		},
+		{
+			"backtrace" : 3,
+			"component" : "Unspecified",
+			"destination" : "include",
+			"paths" : 
+			[
+				"Library/raylib/src/raylib.h",
+				"Library/raylib/src/rlgl.h",
+				"Library/raylib/src/raymath.h"
+			],
+			"type" : "file"
+		},
+		{
+			"backtrace" : 4,
+			"component" : "Unspecified",
+			"destination" : "lib/pkgconfig",
+			"paths" : 
+			[
+				"cmake-build-debug/Library/raylib/raylib/raylib.pc"
+			],
+			"type" : "file"
+		},
+		{
+			"backtrace" : 5,
+			"component" : "Unspecified",
+			"destination" : "lib/cmake/raylib",
+			"paths" : 
+			[
+				"cmake-build-debug/Library/raylib/raylib/raylib-config-version.cmake"
+			],
+			"type" : "file"
+		},
+		{
+			"backtrace" : 6,
+			"component" : "Unspecified",
+			"destination" : "lib/cmake/raylib",
+			"paths" : 
+			[
+				"Library/raylib/src/../cmake/raylib-config.cmake"
+			],
+			"type" : "file"
+		}
+	],
+	"paths" : 
+	{
+		"build" : "Library/raylib/raylib",
+		"source" : "Library/raylib/src"
+	}
+}

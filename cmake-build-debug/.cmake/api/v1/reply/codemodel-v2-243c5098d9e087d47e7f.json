@@ -1,0 +1,200 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"childIndexes" : 
+					[
+						1
+					],
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-.-Debug-d0094a50bb2071803777.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.28"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0
+					]
+				},
+				{
+					"build" : "Library/raylib",
+					"childIndexes" : 
+					[
+						2
+					],
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-Library.raylib-Debug-3b9ef2d4a0b162d3edef.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.0"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 1,
+					"source" : "Library/raylib",
+					"targetIndexes" : 
+					[
+						3
+					]
+				},
+				{
+					"build" : "Library/raylib/raylib",
+					"childIndexes" : 
+					[
+						3
+					],
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-Library.raylib.raylib-Debug-09bd08a345be76802293.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.0"
+					},
+					"parentIndex" : 1,
+					"projectIndex" : 1,
+					"source" : "Library/raylib/src",
+					"targetIndexes" : 
+					[
+						2
+					]
+				},
+				{
+					"build" : "Library/raylib/raylib/external/glfw",
+					"childIndexes" : 
+					[
+						4
+					],
+					"jsonFile" : "directory-Library.raylib.raylib.external.glfw-Debug-5519bd2edb7a1f5feee7.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.4"
+					},
+					"parentIndex" : 2,
+					"projectIndex" : 2,
+					"source" : "Library/raylib/src/external/glfw"
+				},
+				{
+					"build" : "Library/raylib/raylib/external/glfw/src",
+					"jsonFile" : "directory-Library.raylib.raylib.external.glfw.src-Debug-c00d4ff94be1eadcf362.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.4"
+					},
+					"parentIndex" : 3,
+					"projectIndex" : 2,
+					"source" : "Library/raylib/src/external/glfw/src",
+					"targetIndexes" : 
+					[
+						1,
+						4
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"childIndexes" : 
+					[
+						1
+					],
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "Algorithm_Visualizer",
+					"targetIndexes" : 
+					[
+						0
+					]
+				},
+				{
+					"childIndexes" : 
+					[
+						2
+					],
+					"directoryIndexes" : 
+					[
+						1,
+						2
+					],
+					"name" : "raylib",
+					"parentIndex" : 0,
+					"targetIndexes" : 
+					[
+						2,
+						3
+					]
+				},
+				{
+					"directoryIndexes" : 
+					[
+						3,
+						4
+					],
+					"name" : "GLFW",
+					"parentIndex" : 1,
+					"targetIndexes" : 
+					[
+						1,
+						4
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "Algorithm_Visualizer::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-Algorithm_Visualizer-Debug-913fa9172cc20f8da7d7.json",
+					"name" : "Algorithm_Visualizer",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 4,
+					"id" : "glfw::@2762f5bde758131f1109",
+					"jsonFile" : "target-glfw-Debug-11c1ae6ea5fce3a44a89.json",
+					"name" : "glfw",
+					"projectIndex" : 2
+				},
+				{
+					"directoryIndex" : 2,
+					"id" : "raylib::@e4417b479c0da1180ab5",
+					"jsonFile" : "target-raylib-Debug-8ad433127245163374ac.json",
+					"name" : "raylib",
+					"projectIndex" : 1
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "uninstall::@5d0798d935e76dbe2de6",
+					"jsonFile" : "target-uninstall-Debug-f318636a9da639cdb495.json",
+					"name" : "uninstall",
+					"projectIndex" : 1
+				},
+				{
+					"directoryIndex" : 4,
+					"id" : "update_mappings::@2762f5bde758131f1109",
+					"jsonFile" : "target-update_mappings-Debug-563d18ae77e12840136e.json",
+					"name" : "update_mappings",
+					"projectIndex" : 2
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "X:/Code/C++/Algorithm_Visualizer/cmake-build-debug",
+		"source" : "X:/Code/C++/Algorithm_Visualizer"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 6
+	}
+}
