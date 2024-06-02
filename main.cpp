@@ -5,11 +5,16 @@
 
 int main()
 {
-    InitWindow(750, 750, "Algorithm visualizer");
+    Game game = Game();
+
+    InitWindow(game.cell*game.rows, game.cell*game.cols, "Algorithm visualizer");
+    SetTargetFPS(game.fps);
 
     while (!WindowShouldClose())
     {
         BeginDrawing();
+
+        game.Draw();
 
         EndDrawing();
     }
