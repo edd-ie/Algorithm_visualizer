@@ -7,6 +7,7 @@
 #include "Game.h"
 #include "raylib.h"
 #include <string>
+#include <utility>
 
 
 class Button{
@@ -26,13 +27,13 @@ public:
         height = 20*2;
         width = 20*5;
 
-        buttonX = this->x+width;
+        buttonX = this->x+width+2;
         buttonY = this->y+height;
 
         this->temp = color;
         this->hoverColor = hover;
         this->color = temp;
-        this->text = text;
+        this->text = std::move(text);
         textCol = BLACK;
     }
 
@@ -42,9 +43,9 @@ public:
 
         DrawRectangle(x, y, width, height, color);
         DrawText(text.c_str(),
-            x + width / 2 - MeasureText(text.c_str(), 24) / 2,
-            y + height / 2 - 20 / 2,
-            24,
+            x + width / 2 - MeasureText(text.c_str(), 20) / 2,
+            y + height / 2 - 21 / 2,
+            20,
             textCol);
 
 
@@ -90,26 +91,11 @@ public:
         pressed = !pressed;
     }
 
-    bool isPresed()
+    [[nodiscard]] bool isPresed() const
     {
         return pressed;
     }
 
-    // char* btnClick(bool& state)
-    // {
-    //     if(IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && CheckCollisionPointRec(GetMousePosition(),
-    //         Rectangle{static_cast<float>(x), static_cast<float>(y),
-    //             static_cast<float>(width), static_cast<float>(height)})
-    //             )
-    //     {
-    //         state = true;
-    //         color = GREEN;
-    //
-    //         std::cout << "pressed";
-    //
-    //         return text;
-    //     }
-    // }
 };
 
 #endif //BUTTONS_H

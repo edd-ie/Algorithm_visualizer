@@ -15,13 +15,23 @@ class Game
     Color textColor = {252, 250, 251, 255};
     Color btnColor = {239, 235, 237, 255};
     Color btnHover = {78, 72, 78, 255};
+    Color backColor = {242, 90, 81, 255};
+
 
     bool selectedOptions = false;
 
     //Buttons;
-
+    //Menu
     Button sortBtn = Button(5, 5, btnColor, btnHover, "Sort");
     Button searchBtn = Button(14, 5, btnColor, btnHover, "Search");
+
+    //Sort
+    Button insertionBtn = Button(3, 5, btnColor, btnHover, "Insertion");
+    Button selectionBtn = Button(10, 5, btnColor, btnHover, "Selection");
+    Button mergeBtn = Button(17, 5, btnColor, btnHover, "Merge");
+    Button bubbleBtn = Button(24, 5, btnColor, btnHover, "Bubble");
+    Button quickBtn = Button(31, 5, btnColor, btnHover, "Quick");
+    Button backBtn = Button(38, 5, backColor, btnHover, "Back");
 
 
 public:
@@ -34,6 +44,7 @@ public:
     float border = 50;
     float offset = 19;
     std::string currentAction;
+    std::string sortOption;
 
     Game()= default;
 
@@ -61,26 +72,104 @@ public:
 
     void Actions()
     {
-        if(!selectedOptions)
-        {
+        //Render menu
+        if(!selectedOptions){
             sortBtn.Draw();
             searchBtn.Draw();
-
             sortBtn.Actions(currentAction);
             searchBtn.Actions(currentAction);
-            std::cout << currentAction;
-
-
-            if(currentAction == "Sort")
-                if(searchBtn.isPresed())searchBtn.setPressed();
-
-            if(currentAction == "Search" )
-                if(sortBtn.isPresed())sortBtn.setPressed();
-
         }
-        else
+
+
+        if(currentAction == "Sort")
+        {
+            if(searchBtn.isPresed())searchBtn.setPressed();
+            if(backBtn.isPresed())backBtn.setPressed();
+            selectedOptions = true;
+
+            insertionBtn.Draw();
+            selectionBtn.Draw();
+            mergeBtn.Draw();
+            quickBtn.Draw();
+            bubbleBtn.Draw();
+            backBtn.Draw();
+
+            insertionBtn.Actions(sortOption);
+            selectionBtn.Actions(sortOption);
+            mergeBtn.Actions(sortOption);
+            quickBtn.Actions(sortOption);
+            bubbleBtn.Actions(sortOption);
+            backBtn.Actions(currentAction);
+
+            checkSortSelection();
+        }
+        if(currentAction == "Search" )
+        {
+            selectedOptions = true;
+            if(sortBtn.isPresed())sortBtn.setPressed();
+            if(backBtn.isPresed())backBtn.setPressed();
+        };
+
+        if(currentAction == "Back")
+        {
+            if(searchBtn.isPresed())searchBtn.setPressed();
+            if(sortBtn.isPresed())sortBtn.setPressed();
+
+            if(insertionBtn.isPresed())insertionBtn.setPressed();
+            if(quickBtn.isPresed())quickBtn.setPressed();
+            if(selectionBtn.isPresed())selectionBtn.setPressed();
+            if(bubbleBtn.isPresed())bubbleBtn.setPressed();
+            if(mergeBtn.isPresed())mergeBtn.setPressed();
+
+            selectedOptions = false;
+        }
+
+        if(selectedOptions)
         {
 
+        }
+    }
+
+    void checkSortSelection()
+    {
+        if(sortOption == "Merge")
+        {
+            if(insertionBtn.isPresed())insertionBtn.setPressed();
+            if(quickBtn.isPresed())quickBtn.setPressed();
+            if(selectionBtn.isPresed())selectionBtn.setPressed();
+            if(bubbleBtn.isPresed())bubbleBtn.setPressed();
+        }
+
+        if(sortOption == "Insertion")
+        {
+            if(mergeBtn.isPresed())mergeBtn.setPressed();
+            if(quickBtn.isPresed())quickBtn.setPressed();
+            if(selectionBtn.isPresed())selectionBtn.setPressed();
+            if(bubbleBtn.isPresed())bubbleBtn.setPressed();
+        }
+
+        if(sortOption == "Selection")
+        {
+            if(insertionBtn.isPresed())insertionBtn.setPressed();
+            if(quickBtn.isPresed())quickBtn.setPressed();
+            if(mergeBtn.isPresed())mergeBtn.setPressed();
+            if(bubbleBtn.isPresed())bubbleBtn.setPressed();
+        }
+
+        if(sortOption == "Quick")
+        {
+            if(insertionBtn.isPresed())insertionBtn.setPressed();
+            if(mergeBtn.isPresed())mergeBtn.setPressed();
+            if(selectionBtn.isPresed())selectionBtn.setPressed();
+            if(bubbleBtn.isPresed())bubbleBtn.setPressed();
+        }
+
+        if(sortOption == "Bubble")
+        {
+            if(insertionBtn.isPresed())insertionBtn.setPressed();
+            if(quickBtn.isPresed())quickBtn.setPressed();
+            if(selectionBtn.isPresed())selectionBtn.setPressed();
+            if(mergeBtn.isPresed())mergeBtn.setPressed();
         }
     }
 };
