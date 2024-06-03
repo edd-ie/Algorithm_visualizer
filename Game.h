@@ -4,8 +4,10 @@
 
 #ifndef GAME_H
 #define GAME_H
-#include "Buttons.h"
 #include <string>
+
+#include "Buttons.h"
+#include "Canvas.h"
 
 
 class Game
@@ -24,6 +26,9 @@ class Game
     //Menu
     Button sortBtn = Button(5, 5, btnColor, btnHover, "Sort");
     Button searchBtn = Button(14, 5, btnColor, btnHover, "Search");
+
+    //Canvas
+    Canvas canvas = Canvas();
 
     //Sort
     Button insertionBtn = Button(3, 5, btnColor, btnHover, "Insertion");
@@ -78,8 +83,10 @@ public:
             searchBtn.Draw();
             sortBtn.Actions(currentAction);
             searchBtn.Actions(currentAction);
+
         }
 
+        canvas.Draw();
 
         if(currentAction == "Sort")
         {
@@ -93,6 +100,8 @@ public:
             quickBtn.Draw();
             bubbleBtn.Draw();
             backBtn.Draw();
+
+
 
             insertionBtn.Actions(sortOption);
             selectionBtn.Actions(sortOption);
