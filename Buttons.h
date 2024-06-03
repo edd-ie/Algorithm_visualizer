@@ -4,19 +4,22 @@
 
 #ifndef BUTTONS_H
 #define BUTTONS_H
+#include "Game.h"
 #include "raylib.h"
+#include <string>
 
 
 class Button{
     int x, y, height, width;
     Color color{}, hoverColor{}, temp{}, textCol{};
-    char* text;
+    std::string text;
+    bool pressed = false;
 
 
 public:
     int buttonX, buttonY;
 
-    Button(int x, int y,  Color color, Color hover, char* text)
+    Button(int x, int y,  Color color, Color hover, std::string text)
     {
         this->x = 20*x;
         this->y = 20*y;
@@ -38,24 +41,27 @@ public:
         // DrawRectangleRounded(rect, 0.5, 2, color);
 
         DrawRectangle(x, y, width, height, color);
-        DrawText(text,
-            x + width / 2 - MeasureText(text, 24) / 2,
+        DrawText(text.c_str(),
+            x + width / 2 - MeasureText(text.c_str(), 24) / 2,
             y + height / 2 - 20 / 2,
             24,
             textCol);
-        hover();
+
+
     }
 
-    void Actions(bool& state)
+    void Actions(std::string& state)
     {
-        if((text == "Sort" || text == "Search") && !state)
+        btnActions(state);
+        if (pressed)
         {
-            btnClick(state);
+            color = GREEN;
         }
     }
 
-    void hover()
+    void btnActions(std::string& state)
     {
+        //Hover
         if(CheckCollisionPointRec(GetMousePosition(),
             Rectangle{static_cast<float>(x), static_cast<float>(y),
                 static_cast<float>(width), static_cast<float>(height)})
@@ -63,6 +69,14 @@ public:
         {
             color = hoverColor;
             textCol = WHITE;
+
+            //click
+            if(IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && !pressed)
+            {
+                setPressed();
+                state.clear();
+                state.insert(0, text);
+            }
         }
         else
         {
@@ -71,21 +85,31 @@ public:
         }
     }
 
-    char* btnClick(bool& state)
+    void setPressed()
     {
-        if(IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && CheckCollisionPointRec(GetMousePosition(),
-            Rectangle{static_cast<float>(x), static_cast<float>(y),
-                static_cast<float>(width), static_cast<float>(height)})
-                )
-        {
-            state = true;
-            color = GREEN;
-
-            std::cout << "pressed";
-
-            return text;
-        }
+        pressed = !pressed;
     }
+
+    bool isPresed()
+    {
+        return pressed;
+    }
+
+    // char* btnClick(bool& state)
+    // {
+    //     if(IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && CheckCollisionPointRec(GetMousePosition(),
+    //         Rectangle{static_cast<float>(x), static_cast<float>(y),
+    //             static_cast<float>(width), static_cast<float>(height)})
+    //             )
+    //     {
+    //         state = true;
+    //         color = GREEN;
+    //
+    //         std::cout << "pressed";
+    //
+    //         return text;
+    //     }
+    // }
 };
 
 #endif //BUTTONS_H

@@ -5,6 +5,7 @@
 #ifndef GAME_H
 #define GAME_H
 #include "Buttons.h"
+#include <string>
 
 
 class Game
@@ -32,7 +33,7 @@ public:
     int cols = 33;
     float border = 50;
     float offset = 19;
-    char* currentAction;
+    std::string currentAction;
 
     Game()= default;
 
@@ -64,8 +65,18 @@ public:
         {
             sortBtn.Draw();
             searchBtn.Draw();
-            // sortBtn.Actions(selectedOptions);
-            // searchBtn.Actions(selectedOptions);
+
+            sortBtn.Actions(currentAction);
+            searchBtn.Actions(currentAction);
+            std::cout << currentAction;
+
+
+            if(currentAction == "Sort")
+                if(searchBtn.isPresed())searchBtn.setPressed();
+
+            if(currentAction == "Search" )
+                if(sortBtn.isPresed())sortBtn.setPressed();
+
         }
         else
         {
