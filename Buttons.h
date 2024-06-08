@@ -51,13 +51,14 @@ public:
 
     }
 
-    void Actions(std::string& state)
+    bool Actions(std::string& state)
     {
         btnActions(state);
         if (pressed)
         {
             color = GREEN;
         }
+        return pressed;
     }
 
     void btnActions(std::string& state)
