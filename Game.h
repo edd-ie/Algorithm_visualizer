@@ -32,8 +32,8 @@ class Game
     Canvas canvas = Canvas();
 
     //Sort
-    Button insertionBtn = Button(3, 5, btnColor, btnHover, "Insertion");
-    Button selectionBtn = Button(10, 5, btnColor, btnHover, "Selection");
+    Button insertionBtn = Button(3, 5, btnColor, btnHover, "Selection");
+    Button selectionBtn = Button(10, 5, btnColor, btnHover, "Insertion");
     Button mergeBtn = Button(17, 5, btnColor, btnHover, "Merge");
     Button bubbleBtn = Button(24, 5, btnColor, btnHover, "Bubble");
     Button quickBtn = Button(31, 5, btnColor, btnHover, "Quick");
@@ -187,6 +187,7 @@ public:
             if(sortRandom.isPresed())sortRandom.setPressed();
 
             selectedOptions = false;
+            sort.setInit(0);
 
         }
 
@@ -212,7 +213,6 @@ public:
             if(quickBtn.isPresed())quickBtn.setPressed();
             if(selectionBtn.isPresed())selectionBtn.setPressed();
             if(bubbleBtn.isPresed())bubbleBtn.setPressed();
-            sort.setInit(1);
         }
 
         if(sortOption == "Selection")
@@ -221,6 +221,7 @@ public:
             if(quickBtn.isPresed())quickBtn.setPressed();
             if(mergeBtn.isPresed())mergeBtn.setPressed();
             if(bubbleBtn.isPresed())bubbleBtn.setPressed();
+            sort.setInit(1);
         }
 
         if(sortOption == "Quick")
