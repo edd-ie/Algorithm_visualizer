@@ -13,7 +13,7 @@
 
 inline int gameWidth = 100;
 inline int gameHeight = 60;
-inline int fps = 120;
+inline int fps = 400;
 inline int pixel = 10;
 static double updateInterval = 0;
 static bool arrayReset = true;
@@ -68,6 +68,10 @@ public:
         // Run speed
         DrawText("Sort Speed", (gameWidth*pixel)*0.8f, (gameHeight*pixel)*0.6f,
             24, textColor);
+
+        // Run speed
+        DrawText("© Edd.ie_ ", (gameWidth*pixel)*0.92f, (gameHeight*pixel)*0.96f,
+            11, textColor);
     }
 
 
@@ -112,7 +116,7 @@ public:
             normal.setPressed(false);
             if(speedOption != 1) array.resetVal();
             speedOption = 1;
-            updateInterval = 0.1;
+            updateInterval = 0.3;
         }
         if(normal.Actions())
         {
