@@ -11,6 +11,13 @@
 #include "Sorting.h"
 
 
+inline int gameWidth = 100;
+inline int gameHeight = 60;
+inline int fps = 120;
+inline int pixel = 10;
+static double updateInterval = 0;
+static bool arrayReset = true;
+
 class Game
 {
     //Theme
@@ -21,53 +28,37 @@ class Game
     Color backColor = {242, 90, 81, 255};
 
 
-    bool selectedOptions = false;
+    int sortOption = 0;
 
-    //Buttons;
-    //Menu
-    Button sortBtn = Button(5, 5, btnColor, btnHover, "Sort");
-    Button searchBtn = Button(14, 5, btnColor, btnHover, "Search");
+
 
     //Canvas
-    Canvas canvas = Canvas();
+    Canvas canvas = Canvas(static_cast<float>(gameWidth),
+        static_cast<float>(gameHeight), static_cast<float>(pixel));
 
-    //Sort
-    Button insertionBtn = Button(3, 5, btnColor, btnHover, "Selection");
-    Button selectionBtn = Button(10, 5, btnColor, btnHover, "Insertion");
-    Button mergeBtn = Button(17, 5, btnColor, btnHover, "Merge");
-    Button bubbleBtn = Button(24, 5, btnColor, btnHover, "Bubble");
-    Button quickBtn = Button(31, 5, btnColor, btnHover, "Quick");
-    Button backBtn = Button(38, 5, backColor, btnHover, "Back");
+    //Arrays
+    Sort array = Sort(gameWidth, gameHeight, pixel);
 
-    Button sortSmall = Button(10, 8, btnColor, btnHover, "Small");
-    Button sortMedium = Button(17, 8, btnColor, btnHover, "Medium");
-    Button sortLarge = Button(24, 8, btnColor, btnHover, "Large");
-    Button sortRandom = Button(31, 8, btnColor, btnHover, "Randomize");
-
-
-    //Displays
-    Sort sort = Sort();
-
+    //Buttons
+    Button selectSort = Button((gameWidth*pixel)*0.8f, (gameHeight*pixel)*0.25f,
+        btnColor, btnHover, "Selection");
+    Button insertSort = Button((gameWidth*pixel)*0.8f, ((gameHeight*pixel)*0.25f)+55,
+        btnColor, btnHover, "Insertion");
 
 
 public:
-    int fps = 60;
-
-    //Game grids
-    int cell = 20; //pixels
-    int rows = 45;
-    int cols = 33;
-    float border = 50;
-    float offset = 19;
-    std::string currentAction;
-    std::string sortOption = "display";
-    std::string arraySize;
 
     Game()= default;
 
     void displayText() const
     {
-        DrawText("Algorithm Visualizer", (cell*rows)/4, cell, 45, textColor);
+        // App title
+        DrawText("Algorithm Visualizer", (gameWidth*pixel)/3.5, pixel, 45, textColor);
+
+        // Sort Type
+        DrawText("Sort Algorithm", (gameWidth*pixel)*0.8f, (gameHeight*pixel)*0.17f,
+            24, textColor);
+
     }
 
 
@@ -79,167 +70,32 @@ public:
 
         //Text Rendering
         displayText();
-
-
-
-        //Game Actions
-        Actions();
-
-    }
-
-    void Actions()
-    {
-        //Render menu
-        if(!selectedOptions){
-            sortBtn.Draw();
-            searchBtn.Draw();
-            sortBtn.Actions(currentAction);
-            searchBtn.Actions(currentAction);
-            sort.setInit(0);
-        }
-
         canvas.Draw();
+        array.draw(updateInterval, sortOption);
 
-        if(currentAction == "Sort")
-        {
-            if(searchBtn.isPresed())searchBtn.setPressed();
-            if(backBtn.isPresed())backBtn.setPressed();
-            selectedOptions = true;
+        selectSort.Draw();
+        insertSort.Draw();
 
-            insertionBtn.Draw();
-            selectionBtn.Draw();
-            mergeBtn.Draw();
-            quickBtn.Draw();
-            bubbleBtn.Draw();
-            backBtn.Draw();
+        buttonActions();
 
-            sortSmall.Draw();
-            sortMedium.Draw();
-            sortLarge.Draw();
-            sortRandom.Draw();
-
-
-
-            insertionBtn.Actions(sortOption);
-            selectionBtn.Actions(sortOption);
-            mergeBtn.Actions(sortOption);
-            quickBtn.Actions(sortOption);
-            bubbleBtn.Actions(sortOption);
-            backBtn.Actions(currentAction);
-
-            sortSmall.Actions(arraySize);
-            sortMedium.Actions(arraySize);
-            sortLarge.Actions(arraySize);
-
-
-
-            checkSortSelection();
-            std::cout << currentAction;
-            sort.Draw(arraySize);
-
-            if(arraySize == "Small")
-            {
-                if(sortMedium.isPresed())sortMedium.setPressed();
-                if(sortLarge.isPresed())sortLarge.setPressed();
-                if(sortRandom.isPresed())sortRandom.setPressed();
-            }
-            if(arraySize == "Medium")
-            {
-                if(sortSmall.isPresed())sortSmall.setPressed();
-                if(sortLarge.isPresed())sortLarge.setPressed();
-                if(sortRandom.isPresed())sortRandom.setPressed();
-            }
-            if(arraySize == "Large")
-            {
-                if(sortMedium.isPresed())sortMedium.setPressed();
-                if(sortSmall.isPresed())sortSmall.setPressed();
-                if(sortRandom.isPresed())sortRandom.setPressed();
-            }
-
-        }
-
-
-
-        if(currentAction == "Search" )
-        {
-            selectedOptions = true;
-            if(sortBtn.isPresed())sortBtn.setPressed();
-            if(backBtn.isPresed())backBtn.setPressed();
-
-            backBtn.Draw();
-            backBtn.Actions(currentAction);
-        };
-
-        if(currentAction == "Back")
-        {
-            if(searchBtn.isPresed())searchBtn.setPressed();
-            if(sortBtn.isPresed())sortBtn.setPressed();
-
-            if(insertionBtn.isPresed())insertionBtn.setPressed();
-            if(quickBtn.isPresed())quickBtn.setPressed();
-            if(selectionBtn.isPresed())selectionBtn.setPressed();
-            if(bubbleBtn.isPresed())bubbleBtn.setPressed();
-            if(mergeBtn.isPresed())mergeBtn.setPressed();
-
-            if(sortSmall.isPresed())sortSmall.setPressed();
-            if(sortMedium.isPresed())sortMedium.setPressed();
-            if(sortLarge.isPresed())sortLarge.setPressed();
-            if(sortRandom.isPresed())sortRandom.setPressed();
-
-            selectedOptions = false;
-            sort.setInit(0);
-
-        }
-
-        if(selectedOptions)
-        {
-
-        }
     }
 
-    void checkSortSelection()
+    void buttonActions()
     {
-        if(sortOption == "Merge")
+        if(selectSort.Actions())
         {
-            if(insertionBtn.isPresed())insertionBtn.setPressed();
-            if(quickBtn.isPresed())quickBtn.setPressed();
-            if(selectionBtn.isPresed())selectionBtn.setPressed();
-            if(bubbleBtn.isPresed())bubbleBtn.setPressed();
+            insertSort.setPressed(false);
+            if(sortOption != 1) array.resetVal();
+            sortOption = 1;
         }
-
-        if(sortOption == "Insertion")
+        if(insertSort.Actions())
         {
-            if(mergeBtn.isPresed())mergeBtn.setPressed();
-            if(quickBtn.isPresed())quickBtn.setPressed();
-            if(selectionBtn.isPresed())selectionBtn.setPressed();
-            if(bubbleBtn.isPresed())bubbleBtn.setPressed();
-        }
-
-        if(sortOption == "Selection")
-        {
-            if(insertionBtn.isPresed())insertionBtn.setPressed();
-            if(quickBtn.isPresed())quickBtn.setPressed();
-            if(mergeBtn.isPresed())mergeBtn.setPressed();
-            if(bubbleBtn.isPresed())bubbleBtn.setPressed();
-            sort.setInit(1);
-        }
-
-        if(sortOption == "Quick")
-        {
-            if(insertionBtn.isPresed())insertionBtn.setPressed();
-            if(mergeBtn.isPresed())mergeBtn.setPressed();
-            if(selectionBtn.isPresed())selectionBtn.setPressed();
-            if(bubbleBtn.isPresed())bubbleBtn.setPressed();
-        }
-
-        if(sortOption == "Bubble")
-        {
-            if(insertionBtn.isPresed())insertionBtn.setPressed();
-            if(quickBtn.isPresed())quickBtn.setPressed();
-            if(selectionBtn.isPresed())selectionBtn.setPressed();
-            if(mergeBtn.isPresed())mergeBtn.setPressed();
+            selectSort.setPressed(false);
+            if(sortOption != 2) array.resetVal();
+            sortOption = 2;
         }
     }
+
 };
 
 #endif //GAME_H

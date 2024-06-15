@@ -22,9 +22,9 @@ public:
 
     Button(int x, int y,  Color color, Color hover, std::string text)
     {
-        this->x = 20*x;
-        this->y = 20*y;
-        height = 20*2;
+        this->x = x;
+        this->y = y;
+        height = 15*2;
         width = 20*5;
 
         buttonX = this->x+width+2;
@@ -43,25 +43,26 @@ public:
 
         DrawRectangle(x, y, width, height, color);
         DrawText(text.c_str(),
-            x + width / 2 - MeasureText(text.c_str(), 20) / 2,
+            x + width / 2 - MeasureText(text.c_str(), 19) / 2,
             y + height / 2 - 21 / 2,
-            20,
+            19,
             textCol);
 
-
+        // Actions();
     }
 
-    bool Actions(std::string& state)
+    bool Actions()
     {
-        btnActions(state);
+        btnActions();
         if (pressed)
         {
             color = GREEN;
         }
+
         return pressed;
     }
 
-    void btnActions(std::string& state)
+    void btnActions()
     {
         //Hover
         if(CheckCollisionPointRec(GetMousePosition(),
@@ -75,9 +76,7 @@ public:
             //click
             if(IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && !pressed)
             {
-                setPressed();
-                state.clear();
-                state.insert(0, text);
+                setPressed(true);
             }
         }
         else
@@ -87,13 +86,12 @@ public:
         }
     }
 
-    void setPressed()
+    void setPressed(const bool state)
     {
-        pressed = !pressed;
+        pressed = state;
     }
 
-    [[nodiscard]] bool isPresed() const
-    {
+    [[nodiscard]] bool isPresed() const{
         return pressed;
     }
 

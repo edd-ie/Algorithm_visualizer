@@ -10,13 +10,13 @@ class Canvas
     float x, y, width, height;
     Color color{};
 public:
-    Canvas()
+    Canvas(float width, const float height, const float pixel)
     {
-        x = 20*1.5;
-        y = 20*11;
-        width = 20*42;
-        height = 20*21;
-        color = {226, 220, 224,255};
+        this->x = pixel*3;
+        this->y = (height*pixel)*0.16f;
+        this->width = (width*pixel)*0.74f;
+        this->height = (height*pixel)*0.8f;
+        this->color = {226, 220, 224,255};
     }
 
     void Draw(){

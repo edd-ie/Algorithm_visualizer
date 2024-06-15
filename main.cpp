@@ -7,8 +7,8 @@ int main()
 {
     Game game = Game();
 
-    InitWindow(game.cell*game.rows, game.cell*game.cols, "Algorithm visualizer");
-    SetTargetFPS(game.fps);
+    InitWindow(gameWidth*pixel, gameHeight*pixel, "Algorithm visualizer");
+    SetTargetFPS(fps);
 
     while (!WindowShouldClose())
     {
