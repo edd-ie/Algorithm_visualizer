@@ -29,6 +29,7 @@ class Game
 
 
     int sortOption = 0;
+    int speedOption = 0;
 
 
 
@@ -40,10 +41,15 @@ class Game
     Sort array = Sort(gameWidth, gameHeight, pixel);
 
     //Buttons
-    Button selectSort = Button((gameWidth*pixel)*0.8f, (gameHeight*pixel)*0.25f,
+    Button selectSort = Button((gameWidth*pixel)*0.82f, (gameHeight*pixel)*0.25f,
         btnColor, btnHover, "Selection");
-    Button insertSort = Button((gameWidth*pixel)*0.8f, ((gameHeight*pixel)*0.25f)+55,
+    Button insertSort = Button((gameWidth*pixel)*0.82f, ((gameHeight*pixel)*0.25f)+55,
         btnColor, btnHover, "Insertion");
+
+    Button slow = Button((gameWidth*pixel)*0.82f, (gameHeight*pixel)*0.66f,
+        btnColor, btnHover, "Slow");
+    Button normal = Button((gameWidth*pixel)*0.82f, ((gameHeight*pixel)*0.66f)+45,
+        btnColor, btnHover, "Normal");
 
 
 public:
@@ -59,6 +65,9 @@ public:
         DrawText("Sort Algorithm", (gameWidth*pixel)*0.8f, (gameHeight*pixel)*0.17f,
             24, textColor);
 
+        // Run speed
+        DrawText("Sort Speed", (gameWidth*pixel)*0.8f, (gameHeight*pixel)*0.6f,
+            24, textColor);
     }
 
 
@@ -75,6 +84,9 @@ public:
 
         selectSort.Draw();
         insertSort.Draw();
+
+        slow.Draw();
+        normal.Draw();
 
         buttonActions();
 
@@ -93,6 +105,21 @@ public:
             selectSort.setPressed(false);
             if(sortOption != 2) array.resetVal();
             sortOption = 2;
+        }
+
+        if(slow.Actions())
+        {
+            normal.setPressed(false);
+            if(speedOption != 1) array.resetVal();
+            speedOption = 1;
+            updateInterval = 0.1;
+        }
+        if(normal.Actions())
+        {
+            slow.setPressed(false);
+            if(speedOption != 0) array.resetVal();
+            speedOption = 0;
+            updateInterval = 0;
         }
     }
 
