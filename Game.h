@@ -13,7 +13,7 @@
 
 inline int gameWidth = 100;
 inline int gameHeight = 60;
-inline int fps = 400;
+inline int fps = 60;
 inline int pixel = 10;
 static double updateInterval = 0;
 static bool arrayReset = true;
